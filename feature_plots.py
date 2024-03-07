@@ -1,8 +1,9 @@
-#Thea Steuerwald, Gesa Röefzaad, Sofya , Lilly Wiesmann
+#Thea Steuerwald, Gesa Röefzaad, Sofya Shorzhina, Lilly Wiesmann
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib
 
 #insert any of the 8 feature files,example with cardiovascular in primekg/ctd
 filename_primekg= "primekg_cardiovascular_20240223_scores.tsv"
@@ -26,7 +27,7 @@ plt.scatter(filtered_features_df_primekg['zTDA'], filtered_features_df_primekg['
 plt.title('Drug A: z-Score Drug-Target vs. z-Score Disease Genes')
 plt.xlabel('zTDA')
 plt.ylabel('zDTA')
-plt.show()
+#plt.show()
 plt.close()
 
 #comparision of zTDB and zDTB shows the same results in the plot
@@ -36,7 +37,7 @@ Beispiel-Interpretation für primekg_cardiovascular_20240223_scores.tsv:
 -in der Mitte größtes Cluster an zDTA/zTDA scores --> für die meisten zDTA/zTDA
 z scores sehr nah am mean 
 -generell leichter verschiebung unter 0 bei zDTA also eventuell Korrelation höherer
-zTDA --> geringerer zDTA (allerdings nicht wirklich deutlich hier
+zTDA --> geringerer zDTA (allerdings nicht wirklich deutlich hier)
 
 '''
 
@@ -96,9 +97,47 @@ px[0].hist(filtered_features_df_primekg["zTDA"], bins= 100,color="deeppink")
 #über drug target a summierter vergleich von drug target a und cadiovascular
 px[1].hist(filtered_features_df_primekg["zDTA"], bins= 100,color="orange")
 plt.savefig("zTDA_zDTA.png")
+plt.close()
 '''
 visualization of where the zTDA and zDTA are different/the same 
 --> they have many more differences, generally both tend to have more negative values
 which means the mean used in both zTDA and zDTA tends to be higher than the distance 
 between A and D 
+'''
+
+n, bins, patches = plt.hist(filtered_features_df_primekg["sAB"],bins=100)
+
+cmap = matplotlib.colormaps['viridis',100]
+
+
+for i, patch in enumerate(patches):
+    color = cmap(i)
+    plt.setp(patch, 'facecolor', color)
+    plt.setp(patch, 'edgecolor', 'black')
+
+plt.show()
+
+data = filtered_features_df_primekg["sAB"]
+
+data_less_than_zero = data[data < 0]
+data_equal_to_zero = data[data == 0]
+data_greater_than_zero = data[data > 0]
+# Count the entries in each segment
+count_less_than_zero = len(data_less_than_zero)
+count_equal_to_zero = len(data_equal_to_zero)
+count_greater_than_zero = len(data_greater_than_zero)
+
+
+print(f"Count less than zero: {count_less_than_zero}")
+print(f"Count equal to zero: {count_equal_to_zero}")
+print(f"Count greater than zero: {count_greater_than_zero}")
+
+
+
+'''
+Visulaization für sAB, für unser Beispiel cardiovascular in primekg
+Count less than zero: 366170  targets der beiden drugs sind in der Gleichen Nachbarschaft im Netzwerk
+Count equal to zero: 25338  die targets sind mit beiden drugs assoziiert
+Count greater than zero: 9339158  die targets sind topologisch separieret 
+
 '''
