@@ -1,4 +1,4 @@
-Interaction_A(DrugBank_ID)	Interaction_B(DrugBank_ID)	adv/app	drugcomb
+drugA	drugB	adv/app	drugcomb
 DB00193	DB00051	0	(DB00193,DB00051)
 DB00126	DB01395	0	(DB00126,DB01395)
 DB00163	DB00051	0	(DB00163,DB00051)
