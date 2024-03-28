@@ -214,4 +214,20 @@ weighted avg       0.99      0.97      0.98      1387
 ROC AUC: 0.8531316067653277
 Matthews Correlation Coefficient: 0.18988531087151542
 Weighted F1 Score: 0.9792311265672272
+
+-> kernel 'rbf', ADASYN, bayes optimization, scaling
+Best Hyperparameters: [7.985775569916307, 1.9160044196750219, 4]
+Accuracy: 0.9935111751982696
+              precision    recall  f1-score   support
+
+           0       1.00      0.18      0.31        11
+           1       0.99      1.00      1.00      1376
+
+    accuracy                           0.99      1387
+   macro avg       1.00      0.59      0.65      1387
+weighted avg       0.99      0.99      0.99      1387
+
+ROC AUC: 0.9046643763213531
+Matthews Correlation Coefficient: 0.4250137548692131
+Weighted F1 Score: 0.9912756193099853
 '''
